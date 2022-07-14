@@ -16,6 +16,8 @@ const app = express()
 app.use(json()) //mdw para extraer el json que viene en las peticiones
 app.use(urlencoded({ extended: true }))  //mdw para poder extraer los datos que vienen en la url cuando se envia un formulario (el true para poder enviar objetos anidados)
 
+app.use(express.static('public'))
+
 app.use( //para passport que tambien usa session
     session({
         secret: 'shhhhhhhhhhhhhhh',
@@ -26,6 +28,10 @@ app.use( //para passport que tambien usa session
 
 app.use(passport.initialize()) 
 app.use(passport.session())
+
+app.get('/mensaje', (req,res) => {
+    res.send('Hola Node.js desde Heroku!');
+})
 
 /*****************************************************************************************/
 
